@@ -55,9 +55,10 @@ public class SyncroHttpClient {
 				return new UpdateInfo(UpdateCheckStatus.NO_UPDATE);
 			}
 			if(response.statusCode() == HTTP_STATUS_OK) {
+				System.out.println(response.body());
 				return new UpdateInfo(UpdateCheckStatus.UPDATE_AVAILABLE, response.body());
 			}
-		} catch(IOException | InterruptedException ex) {
+		} catch(Exception ex) {
 			System.err.println("Failed to check for updates");
 			ex.printStackTrace(System.err);
 		}

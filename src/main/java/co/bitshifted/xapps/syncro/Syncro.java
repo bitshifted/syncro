@@ -15,7 +15,6 @@ import co.bitshifted.xapps.syncro.model.UpdateCheckStatus;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
@@ -38,8 +37,10 @@ public class Syncro {
 				Files.createDirectories(appCacheDir);
 			}
 			// download control files
-			var downloadList = List.of(httpClient.downloadFull(status.getContentUrl().toURI(), new DownloadHandler(appId, "contents.zip.zsync")) ,
-					httpClient.downloadFull(status.getModulesUrl().toURI(), new DownloadHandler(appId, "modules.zip.zsync")));
+			var downloadList = status.getDetails().stream()
+					.map(d -> httpClient.downloadFull(d.getUri(),
+							new DownloadHandler(appId, d.getFileName())))
+					.collect(Collectors.toList());
 			downloadList.forEach(dl -> dl.join());
 			// download update files
 			var updateFutures = downloadList.stream()
@@ -49,7 +50,11 @@ public class Syncro {
 								var first = f.get().getOutput();
 								System.out.println("Output: " + first.toString());
 								Zsync.Options options = new Zsync.Options();
-								options.setOutputFile(first.getParent().resolve(first.toFile().getName().replaceAll(".zsync", "")));
+								var fileName = first.toFile().getName().replaceAll(".zsync", "");
+								if(Files.exists(first.getParent().resolve(fileName))) {
+									options.addInputFile(first.getParent().resolve(fileName));
+								}
+								options.setOutputFile(first.getParent().resolve(first.toFile().getName().replaceAll(".zsync", ".new")));
 								var zsync = new Zsync();
 								Path out  = zsync.zsync(first.toUri(), options);
 								return out;

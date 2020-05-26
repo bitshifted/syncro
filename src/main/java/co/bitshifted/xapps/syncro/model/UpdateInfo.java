@@ -8,12 +8,25 @@
 
 package co.bitshifted.xapps.syncro.model;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.StringReader;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathExpressionException;
+import javax.xml.xpath.XPathFactory;
+import java.io.*;
+import java.net.MalformedURLException;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -21,9 +34,10 @@ import java.util.Map;
  */
 public class UpdateInfo {
 	private final UpdateCheckStatus status;
-	private final Map<String, URL> targetMap = new HashMap<>();
+	private final List<UpdateDetail> details = new ArrayList<>();
 
-	public UpdateInfo(UpdateCheckStatus status, String targetData) throws IOException{
+	public UpdateInfo(UpdateCheckStatus status, String targetData)
+			throws ParserConfigurationException, SAXException, IOException, XPathExpressionException, URISyntaxException{
 		this.status = status;
 		initTargets(targetData);
 	}
@@ -36,23 +50,20 @@ public class UpdateInfo {
 		return status;
 	}
 
-	public URL getContentUrl() {
-		return targetMap.get("contents.zip");
+	public List<UpdateDetail> getDetails() {
+		return details;
 	}
 
-	public URL getModulesUrl() {
-		return targetMap.get("modules.zip");
-	}
-
-	private void initTargets(String data) throws IOException {
-		try(var reader = new BufferedReader(new StringReader(data))) {
-			String line;
-			while ((line = reader.readLine()) != null) {
-				var parts = line.split("->");
-				if(parts.length == 2) {
-					targetMap.put(parts[0].trim(), new URL(parts[1].trim()));
-				}
-			}
+	private void initTargets(String data) throws ParserConfigurationException, SAXException, IOException, XPathExpressionException, URISyntaxException {
+		var docBuilderFactory = DocumentBuilderFactory.newInstance();
+		var builder = docBuilderFactory.newDocumentBuilder();
+		var xmlDocument = builder.parse(new InputSource(new StringReader(data)));
+		var xpathFactory = XPathFactory.newInstance();
+		var xpath = xpathFactory.newXPath();
+		var nodes = (NodeList)xpath.compile("//detail").evaluate(xmlDocument, XPathConstants.NODESET);
+		for(int i = 0;i < nodes.getLength();i++) {
+			var node = nodes.item(i);
+			details.add(UpdateDetail.fromXml(node));
 		}
 	}
 
