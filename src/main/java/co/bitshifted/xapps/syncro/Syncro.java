@@ -11,6 +11,7 @@ package co.bitshifted.xapps.syncro;
 import co.bitshfted.xapps.zsync.Zsync;
 import co.bitshifted.xapps.syncro.http.DownloadHandler;
 import co.bitshifted.xapps.syncro.http.SyncroHttpClient;
+import co.bitshifted.xapps.syncro.launch.AppLauncher;
 import co.bitshifted.xapps.syncro.model.UpdateCheckStatus;
 import co.bitshifted.xapps.syncro.sync.MacFileSyncer;
 
@@ -78,7 +79,10 @@ public class Syncro {
 					})
 					.filter(p -> p != null)
 					.collect(Collectors.toList()));
-			syncer.sync();
+			var updateDir = syncer.sync();
+			var launcher = new AppLauncher();
+			var process = launcher.launch(updateDir);
+			System.out.println("launch status: " + process.info().toString());
 		}
 	}
 }

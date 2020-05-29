@@ -34,13 +34,14 @@ public class MacFileSyncer {
 		System.out.println("paths: " + sourcePaths);
 	}
 
-	public void sync() throws IOException {
+	public Path sync() throws IOException {
 		var newPath = createBackup();
 		extractUpdates(newPath);
 		// point to new version
 		var contentsSymLink = appBundleDirectory.resolve("Contents");
 		Files.delete(contentsSymLink);
-		Files.createSymbolicLink(contentsSymLink, appBundleDirectory.resolve("Contents.new"));
+		var symlink = Files.createSymbolicLink(contentsSymLink, appBundleDirectory.resolve("Contents.new"));
+		return symlink.resolve("MacOS"); // for Mac, need to return this directory
 	}
 
 	private Path createBackup() throws IOException {
