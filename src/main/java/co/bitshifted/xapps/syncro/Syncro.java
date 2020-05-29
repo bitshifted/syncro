@@ -12,6 +12,7 @@ import co.bitshfted.xapps.zsync.Zsync;
 import co.bitshifted.xapps.syncro.http.DownloadHandler;
 import co.bitshifted.xapps.syncro.http.SyncroHttpClient;
 import co.bitshifted.xapps.syncro.model.UpdateCheckStatus;
+import co.bitshifted.xapps.syncro.sync.MacFileSyncer;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -36,10 +37,11 @@ public class Syncro {
 			if(!Files.exists(appCacheDir)) {
 				Files.createDirectories(appCacheDir);
 			}
+			var workDir = Path.of(System.getProperty("user.dir"));
 			// download control files
 			var downloadList = status.getDetails().stream()
 					.map(d -> httpClient.downloadFull(d.getUri(),
-							new DownloadHandler(appId, d.getFileName())))
+							new DownloadHandler(appId, workDir.resolve(d.getFileName()))))
 					.collect(Collectors.toList());
 			downloadList.forEach(dl -> dl.join());
 			// download update files
@@ -51,10 +53,10 @@ public class Syncro {
 								System.out.println("Output: " + first.toString());
 								Zsync.Options options = new Zsync.Options();
 								var fileName = first.toFile().getName().replaceAll(".zsync", "");
-								if(Files.exists(first.getParent().resolve(fileName))) {
-									options.addInputFile(first.getParent().resolve(fileName));
+								if(Files.exists(SyncroUtils.getAppCacheDir(appId).resolve(fileName))) {
+									options.addInputFile(SyncroUtils.getAppCacheDir(appId).resolve(fileName));
+									System.out.println("Input file: " + SyncroUtils.getAppCacheDir(appId).resolve(fileName));
 								}
-								options.setOutputFile(first.getParent().resolve(first.toFile().getName().replaceAll(".zsync", ".new")));
 								var zsync = new Zsync();
 								Path out  = zsync.zsync(first.toUri(), options);
 								return out;
@@ -65,6 +67,18 @@ public class Syncro {
 						}))
 					.collect(Collectors.toList());
 			updateFutures.forEach(uf -> uf.join());
+			var syncer = new MacFileSyncer(updateFutures.stream()
+					.map(uf -> {
+						try {
+							return uf.get();
+						} catch(Exception ex) {
+							ex.printStackTrace();
+							return null;
+						}
+					})
+					.filter(p -> p != null)
+					.collect(Collectors.toList()));
+			syncer.sync();
 		}
 	}
 }
