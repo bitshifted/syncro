@@ -19,6 +19,7 @@ import java.nio.channels.ReadableByteChannel;
 import java.nio.channels.WritableByteChannel;
 import java.nio.file.Files;
 import java.nio.file.OpenOption;
+import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 
 /**
@@ -26,18 +27,18 @@ import java.nio.file.StandardOpenOption;
  */
 public class DownloadHandler {
 	private final String applicationId;
-	private final String fileName;
+	private final Path target;
 
-	public DownloadHandler(String appId, String fileName){
+	public DownloadHandler(String appId, Path target){
 		this.applicationId = appId;
-		this.fileName = fileName;
+		this.target = target;
+		System.out.println("target download: " + target.toString());
 	}
 
 	public DownloadResult handleDownload(InputStream in) {
 		var bytesWritten = 0L;
 		try {
 			var src  = Channels.newChannel(in);
-			var target = SyncroUtils.getAppCacheDir(applicationId).resolve(fileName);
 			var dest  = Channels.newChannel(Files.newOutputStream(target));
 			bytesWritten = copyData(src, dest);
 			src.close();

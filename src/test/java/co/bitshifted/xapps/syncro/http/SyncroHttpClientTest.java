@@ -29,18 +29,18 @@ public class SyncroHttpClientTest {
 
 	@Rule
 	public WireMockRule server = new WireMockRule(options()
-			.port(8080)
+			.port(9000)
 			.notifier(new ConsoleNotifier(false)) // set to true for verbose logging
 	);
 
 	@Before
 	public void setup() {
-		httpClient = new SyncroHttpClient("http://localhost:8080", "appId", "1234");
+		httpClient = new SyncroHttpClient("http://localhost:9000", "appId", "1234");
 	}
 
 	@Test
 	public void testCheckForUpdateNoUpdate() {
-		stubFor(get(urlPathMatching("\\/updates\\/app\\/.+\\/version\\/.+"))
+		stubFor(get(urlPathMatching("\\/update\\/app\\/.+\\/release\\/.+"))
 				.willReturn(aResponse()
 						.withStatus(HTTP_STATUS_NOT_MODIFIED)));
 		var status = httpClient.checkForUpdates();
