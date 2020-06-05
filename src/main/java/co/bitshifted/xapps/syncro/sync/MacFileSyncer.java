@@ -8,6 +8,8 @@
 
 package co.bitshifted.xapps.syncro.sync;
 
+import co.bitshifted.xapps.syncro.SyncroUtils;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -34,13 +36,26 @@ public class MacFileSyncer {
 		System.out.println("paths: " + sourcePaths);
 	}
 
-	public void sync() throws IOException {
+	public Path sync() throws IOException {
 		var newPath = createBackup();
 		extractUpdates(newPath);
 		// point to new version
 		var contentsSymLink = appBundleDirectory.resolve("Contents");
 		Files.delete(contentsSymLink);
-		Files.createSymbolicLink(contentsSymLink, appBundleDirectory.resolve("Contents.new"));
+		var symlink = Files.createSymbolicLink(contentsSymLink, appBundleDirectory.resolve("Contents.new"));
+		return symlink.resolve("MacOS"); // for Mac, need to return this directory
+	}
+
+	public void cleanup() throws IOException {
+		System.out.println("Cleaning up");
+		// delete Contents.old directory
+		var oldContents = appBundleDirectory.resolve("Contents.old");
+		SyncroUtils.deleteDirectory(oldContents.toFile());
+		// delete Contents symlink
+		Files.delete(appBundleDirectory.resolve("Contents"));
+		// rename Contents.new
+		var contents = appBundleDirectory.resolve("Contents");
+		Files.move(appBundleDirectory.resolve("Contents.new"), contents);
 	}
 
 	private Path createBackup() throws IOException {
