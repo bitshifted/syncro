@@ -8,6 +8,8 @@
 
 package co.bitshifted.xapps.syncro;
 
+import java.io.File;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Locale;
 
@@ -47,5 +49,15 @@ public final class SyncroUtils {
 		} else {
 			return "x86";
 		}
+	}
+
+	public static boolean deleteDirectory(File directory) {
+		File[] allContents = directory.listFiles();
+		if (allContents != null) {
+			for (File file : allContents) {
+				deleteDirectory(file);
+			}
+		}
+		return directory.delete();
 	}
 }

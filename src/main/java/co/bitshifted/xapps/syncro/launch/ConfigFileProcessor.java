@@ -50,6 +50,7 @@ public class ConfigFileProcessor {
 		commands.addAll(getSystemProperties(xpath));
 		commands.addAll(getClasspath(xpath));
 		commands.addAll(getModulePath(xpath));
+		commands.addAll(getAddModules(xpath));
 
 		var splashScreen = getSplashscreen(xpath);
 		if(splashScreen != null) {
@@ -59,6 +60,7 @@ public class ConfigFileProcessor {
 		var mainClass = nodeValueAsString(xpath, "//main-class");
 
 		commands.addAll(getModule(xpath, mainClass));
+		commands.addAll(getArguments(xpath));
 
 		System.out.println("launch command: " + commands);
 		return commands.toArray(new String[commands.size()]);
@@ -110,6 +112,16 @@ public class ConfigFileProcessor {
 		return list;
 	}
 
+	private List<String> getAddModules(XPath xpath) throws XPathExpressionException {
+		var list = new ArrayList<String>();
+		var modules = nodeValueAsString(xpath, "//add-modules");
+		if(modules != null && !modules.isEmpty() && !modules.isBlank()) {
+			list.add("--add-modules");
+			list.add(modules);
+		}
+		return list;
+	}
+
 	private String getSplashscreen(XPath xpath) throws XPathExpressionException {
 		var splash = nodeValueAsString(xpath, "//splash-screen");
 		if(splash != null && !splash.isBlank() && !splash.isEmpty()) {
@@ -126,6 +138,14 @@ public class ConfigFileProcessor {
 			list.add(module + "/" + mainClass);
 		}
 		return list;
+	}
+
+	private List<String> getArguments(XPath xPath) throws XPathExpressionException {
+		var value = nodeValueAsString(xPath, "//args");
+		if(value != null) {
+			return Arrays.asList(value.split("\\s"));
+		}
+		return List.of();
 	}
 
 	private String nodeValueAsString(XPath xpath, String expressionString) throws XPathExpressionException {

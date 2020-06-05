@@ -83,6 +83,7 @@ public class Syncro {
 			var launcher = new AppLauncher();
 			var process = launcher.launch(updateDir);
 			System.out.println("launch status: " + process.info().toString());
+			syncer.cleanup();
 		}
 	}
 }
