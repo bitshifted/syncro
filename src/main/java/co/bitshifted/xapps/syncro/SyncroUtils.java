@@ -12,6 +12,7 @@ import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Locale;
+import java.util.Set;
 
 /**
  * @author Vladimir Djurovic
@@ -19,6 +20,7 @@ import java.util.Locale;
 public final class SyncroUtils {
 
 	private static final String XAPPS_BASE_DIR = ".xapps";
+	private static final Set<String> X64_ARCH_NAMES = Set.of("x86_64", "amd64");
 
 	private SyncroUtils() {
 
@@ -30,12 +32,13 @@ public final class SyncroUtils {
 	}
 
 	public static String getOsType() {
-		String OS = System.getProperty("os.name", "generic").toLowerCase(Locale.ENGLISH);
-		if ((OS.indexOf("mac") >= 0) || (OS.indexOf("darwin") >= 0)) {
+		String os = System.getProperty("os.name", "generic").toLowerCase(Locale.ENGLISH);
+		System.out.println("OS: " + os);
+		if ((os.indexOf("mac") >= 0) || (os.indexOf("darwin") >= 0)) {
 			return "mac";
-		} else if (OS.indexOf("win") >= 0) {
+		} else if (os.indexOf("win") >= 0) {
 			return "win";
-		} else if (OS.indexOf("nux") >= 0) {
+		} else if (os.indexOf("nux") >= 0) {
 			return "linux";
 		} else {
 			return "other";
@@ -44,7 +47,8 @@ public final class SyncroUtils {
 
 	public static String getCpuArch() {
 		var arch = System.getProperty("os.arch");
-		if(arch.equals("x86_64")){
+		System.out.println("CPU arch: " + arch);
+		if(X64_ARCH_NAMES.contains(arch)){
 			return "x64";
 		} else {
 			return "x86";
