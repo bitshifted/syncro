@@ -12,6 +12,7 @@ import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Locale;
+import java.util.Set;
 
 /**
  * @author Vladimir Djurovic
@@ -19,6 +20,7 @@ import java.util.Locale;
 public final class SyncroUtils {
 
 	private static final String XAPPS_BASE_DIR = ".xapps";
+	private static final Set<String> X64_VALUES = Set.of("x86_64", "amd64");
 
 	private SyncroUtils() {
 
@@ -44,7 +46,7 @@ public final class SyncroUtils {
 
 	public static String getCpuArch() {
 		var arch = System.getProperty("os.arch");
-		if(arch.equals("x86_64")){
+		if(X64_VALUES.contains(arch)){
 			return "x64";
 		} else {
 			return "x86";
@@ -58,6 +60,7 @@ public final class SyncroUtils {
 				deleteDirectory(file);
 			}
 		}
+		System.out.println("deleting file " + directory.getAbsolutePath());
 		return directory.delete();
 	}
 }

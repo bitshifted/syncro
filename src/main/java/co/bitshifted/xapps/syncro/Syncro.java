@@ -14,6 +14,7 @@ import co.bitshifted.xapps.syncro.http.SyncroHttpClient;
 import co.bitshifted.xapps.syncro.launch.AppLauncher;
 import co.bitshifted.xapps.syncro.model.UpdateCheckStatus;
 import co.bitshifted.xapps.syncro.sync.MacFileSyncer;
+import co.bitshifted.xapps.syncro.sync.WindowsFileSyncer;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -68,22 +69,48 @@ public class Syncro {
 						}))
 					.collect(Collectors.toList());
 			updateFutures.forEach(uf -> uf.join());
-			var syncer = new MacFileSyncer(updateFutures.stream()
-					.map(uf -> {
-						try {
-							return uf.get();
-						} catch(Exception ex) {
-							ex.printStackTrace();
-							return null;
-						}
-					})
-					.filter(p -> p != null)
-					.collect(Collectors.toList()));
-			var updateDir = syncer.sync();
-			var launcher = new AppLauncher();
-			var process = launcher.launch(updateDir);
-			System.out.println("launch status: " + process.info().toString());
-			syncer.cleanup();
+			var osType = SyncroUtils.getOsType();
+			if("mac".equals(osType)) {
+				System.out.println("Mac OS found");
+				var syncer = new MacFileSyncer(updateFutures.stream()
+						.map(uf -> {
+							try {
+								return uf.get();
+							} catch(Exception ex) {
+								ex.printStackTrace();
+								return null;
+							}
+						})
+						.filter(p -> p != null)
+						.collect(Collectors.toList()));
+				var updateDir = syncer.sync();
+				var launcher = new AppLauncher();
+				var process = launcher.launch(updateDir);
+				System.out.println("launch status: " + process.info().toString());
+				syncer.cleanup();
+			} else if("win".equals(osType)) {
+				System.out.println("Windows OS found");
+				var syncer = new WindowsFileSyncer(updateFutures.stream()
+						.map(uf -> {
+							try {
+								return uf.get();
+							} catch(Exception ex) {
+								ex.printStackTrace();
+								return null;
+							}
+						})
+						.filter(p -> p != null)
+						.collect(Collectors.toList()));
+				var updateDir = syncer.sync();
+				var launcher = new AppLauncher();
+				var process = launcher.launch(updateDir);
+				System.out.println("launch status: " + process.info().toString());
+				var procBuilder = new ProcessBuilder();
+				procBuilder.directory(updateDir.toFile()).command("jre/bin/java.exe", "--module", "co.bitshifted.xapps.syncro/co.bitshifted.xapps.syncro.Cleanup", workDir.toString(), updateDir.toString())
+				.redirectError(ProcessBuilder.Redirect.INHERIT).redirectOutput(ProcessBuilder.Redirect.INHERIT);
+				procBuilder.start();
+			}
+
 		}
 	}
 }
