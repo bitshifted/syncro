@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--
+  ~ /*
+  ~  * Copyright (c) 2022  Bitshift D.O.O (http://bitshifted.co)
+  ~  *
+  ~  * This Source Code Form is subject to the terms of the Mozilla Public
+  ~  * License, v. 2.0. If a copy of the MPL was not distributed with this
+  ~  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+  ~  */
+  -->
+
+<release-info release-id="91prrJjtyrv" timestamp="20220721111155">
+    <entries>
+        <entry executable="true" sha256="c1d942bb1e059044daabb35caac95cb14bcbb79f0fbb7bad0740a094809f3165" target="simplejavafx"/>
+        <entry executable="false" sha256="045700bcabd5441a50964944f38babbee8fc2e8159179b8cb5e64d18274e3853" target="cp/045700bcabd5441a50964944f38babbee8fc2e8159179b8cb5e64d18274e3853.jar"/>
+        <entry executable="false" sha256="53d60cef64ab6a1549da4d0239c009f8ef8084b62ecd18c3bda782b4d6520a8f" target="cp/53d60cef64ab6a1549da4d0239c009f8ef8084b62ecd18c3bda782b4d6520a8f.jar"/>
+        <entry executable="false" sha256="51d698cac8627e221152b4c421900f73f4af5abcd517008e695e43e22c40ec33" target="cp/51d698cac8627e221152b4c421900f73f4af5abcd517008e695e43e22c40ec33.jar"/>
+        <entry executable="false" sha256="01d1b7fd8b84e14ad12b54abfcbc41fa8d223757a63bf988b4a33dad1060616e" target="modules/01d1b7fd8b84e14ad12b54abfcbc41fa8d223757a63bf988b4a33dad1060616e.jar"/>
+        <entry executable="false" sha256="b72463867e5098f8df4a0e4c833331ebfe1553ce37a347a33342343cb028da06" target="modules/b72463867e5098f8df4a0e4c833331ebfe1553ce37a347a33342343cb028da06.jar"/>
+        <entry executable="false" sha256="79fc216648f1642ad3ebcf273d5196c0f7c121327882d3ddd4b803f3f605ef44" target="modules/79fc216648f1642ad3ebcf273d5196c0f7c121327882d3ddd4b803f3f605ef44.jar"/>
+        <entry executable="false" sha256="36b5f99ede138182c08fdff649d68dcbe7681e0cb61ef4bc8367fea8a0118e35" target="modules/36b5f99ede138182c08fdff649d68dcbe7681e0cb61ef4bc8367fea8a0118e35.jar"/>
+        <entry executable="false" sha256="de3ef674c14a46140b632a59ffad0183a2d0b9d7e9db94cecd49afab82c510a7" target="icon_x48.png"/>
+        <entry executable="false" sha256="8177f97513213526df2cf6184d8ff986c675afb514d4e68a404010521b880643" target="LICENSE"/>
+        <entry executable="false" sha256="62ca8dafb413b188adf8dcfe6378edccc3cd64a8cce4c138186ce85595255312" target="simplejavafx.desktop"/>
+        <entry executable="false" sha256="8decc8571946d4cd70a024949e033a2a2a54377fe9f1c1b944c20f9ee11a9e51" target="files/sample.pdf"/>
+        <entry executable="false" sha256="3a6e8f1afbab12b8f5e3ad0ddb9912750bc959cc44a4e80fea65f82cb5af7866" target="files/skip.txt"/>
+        <entry executable="false" sha256="c3f17156ab7c192571ecfc742e88c16a4b7243a4d4b4a420fcb68dec44e10196" target="files/excel sample.xlsx"/>
+        <entry executable="false" sha256="196b2254dc1635ce84168f25c40453cd4dedf24849dc897ecdc2b45e94d566ba" target="splash.png"/>
+        <entry executable="false" sha256="8478b936470a644b042adaea97427aa54e465c11e8a17837be39b177b8d0a868" target="icon_x64.png"/>
+        <entry executable="false" sha256="95b20c58ca3b96bf6a28c13632f671b3f87d5923c0338012e0d90ba4cf157e29" target="jre/include/jvmti.h"/>
+        <entry executable="false" sha256="6ee3e52d24bdb4f4d0312dfbab3d47bd524cbdac5540a4d790cac0620c59b3c8" target="jre/include/jvmticmlr.h"/>
+        <entry executable="false" sha256="85101d07928a589accfef9d7c261850faa8d5afc8ef262af7ec9734008f6f2f5" target="jre/include/jawt.h"/>
+        <entry executable="false" sha256="389445772f7783f5329d1666621b95cb33f3eb30b336bd47fe07abb0e1f47ad8" target="jre/include/classfile_constants.h"/>
+        <entry executable="false" sha256="1266aea5b9f5d5db1cb6f8e5c6c43cfa7f80bc4f72d7fe42c6131bb939dc70f4" target="jre/include/jni.h"/>
+        <entry executable="false" sha256="88cb5c33e306900dd35a78d5a439087123b8e91b0986bb5acb42cc9bd2fcc42e" target="jre/include/linux/jni_md.h"/>
+        <entry executable="false" sha256="656d0a92cd0774facb79662a261ec96043f284e145ce4f8fde1e08e8e28775d2" target="jre/include/linux/jawt_md.h"/>
+        <entry executable="false" sha256="f726a69464200187812ac30a0abd489d79ed98d972a1da9381a4bb9048b74c58" target="jre/lib/libfontmanager.so"/>
+        <entry executable="false" sha256="c95578930871344410ce2f2b43d2b74a78bcad05017a87a5dc8f030694fbb076" target="jre/lib/libnet.so"/>
+        <entry executable="true" sha256="c5a38f7113c178971034bf37b3383885cf8d40c9ee332c9f9f4b7771857593e1" target="jre/lib/jspawnhelper"/>
+        <entry executable="false" sha256="dafb48c49eb8898dc62342d3c8033f1815ad6a004edf5b32061c78a4dd0437ad" target="jre/lib/libsplashscreen.so"/>
+        <entry executable="false" sha256="6b39b7341b27f3f90f230086af1d93ea50273999704e0bc087582c073359cc18" target="jre/lib/libjimage.so"/>
+        <entry executable="false" sha256="96dbc3065edd62af95c8c3cb1fa347694763cad0e5ad2e03b0ae3dd6afc9e23e" target="jre/lib/libzip.so"/>
+        <entry executable="false" sha256="faaa2429f8db6361fc2fb034d0b99449845f5aeb8fd326e4aa9bef74223f037b" target="jre/lib/libjavajpeg.so"/>
+        <entry executable="false" sha256="458eb4ec6185a86457c0093972c3a4f220523f135955412fab173dfdc417ab1c" target="jre/lib/classlist"/>
+        <entry executable="false" sha256="780c565d5af3ee6f68b887b75c041cdf46a0592f67012f12eeb691283e92630a" target="jre/lib/psfontj2d.properties"/>
+        <entry executable="false" sha256="114bc0020b992c8ac57de53d093a8b4c09ce26962e99456bc60275b0667e58c3" target="jre/lib/modules"/>
+        <entry executable="false" sha256="333f2e5c7f72423a105f108c5e226d2bb4724c937365f353022b24cb53493658" target="jre/lib/libjsig.so"/>
+        <entry executable="true" sha256="9159db1ce37eb3998552076a7b727287e8c678dbe46a91b17328fc5c5d4d85db" target="jre/lib/jexec"/>
+        <entry executable="false" sha256="a9844ff513cce6041c571a7e914c160facad086ca29c71cd8bd49357b80d5db5" target="jre/lib/security/default.policy"/>
+        <entry executable="false" sha256="0e53506b83e1796c651e65cbb4a3b086c1df5eaa61da814109094289a8abd11e" target="jre/lib/security/cacerts"/>
+        <entry executable="false" sha256="96572f243f31c2ef81a6e627542e596f6a9295cff3c7ae095c1b595cb1457ded" target="jre/lib/security/blocked.certs"/>
+        <entry executable="false" sha256="1200ae5fff5720e797186b4afcae436c27a43c1e46d2ae44cec435461727fbbb" target="jre/lib/security/public_suffix_list.dat"/>
+        <entry executable="false" sha256="2fa6f0855601dcf44847947b3989ee9973bac3468b0a6730339ad96a09a586cd" target="jre/lib/jfr/default.jfc"/>
+        <entry executable="false" sha256="34c90a3e730df674b8cd60fbc632539c754a559bf34cd9c8e2b70592d0f4dd78" target="jre/lib/jfr/profile.jfc"/>
+        <entry executable="false" sha256="a1d6768f57eccd63dc7b4c26e191b7b165a92e34e9e26a21e87e66ec4504eddc" target="jre/lib/libjava.so"/>
+        <entry executable="false" sha256="5865a073e635cfd523b4bab03bc0cd62d7f66c6fef63da5b762c4d0a4e541980" target="jre/lib/tzdb.dat"/>
+        <entry executable="false" sha256="06aac9cef9f5ec5d561e98638cb2d1fbac5060d2c9b19e7cbdc915dc2f6d5119" target="jre/lib/libverify.so"/>
+        <entry executable="false" sha256="84f34e9f696c4ec1df31f1f1c1979d97908311f8b3f8ee13dea0ad9de58f5ffb" target="jre/lib/libawt.so"/>
+        <entry executable="false" sha256="333f2e5c7f72423a105f108c5e226d2bb4724c937365f353022b24cb53493658" target="jre/lib/server/libjsig.so"/>
+        <entry executable="false" sha256="71216b7a23bf653f1f3524691f30656eb2d051b23ea38b0b454938eaa411a648" target="jre/lib/server/libjvm.so"/>
+        <entry executable="false" sha256="f83cfffff440f05d6fb5edc17469763de1817416a1f169bcc37f79c22054affb" target="jre/lib/libmlib_image.so"/>
+        <entry executable="false" sha256="5a4bd51b969bf187ff86d94f4a71fdfbfa602762975fa3c73d264b4575f7c78f" target="jre/lib/psfont.properties.ja"/>
+        <entry executable="false" sha256="9902070d850e27318cdb14c0f175f63b428328b1f4af34288760de2065027598" target="jre/lib/jrt-fs.jar"/>
+        <entry executable="false" sha256="7ac60c9fd214cdf58093f2b884fac7cb8209dab37595e2837223366ef5ae8d0f" target="jre/lib/libjli.so"/>
+        <entry executable="false" sha256="ec08094087921ce306c7197860e1410ebaf8b2dec946c7a3a024365215d3af5b" target="jre/lib/libjawt.so"/>
+        <entry executable="false" sha256="239d381ceba767a6a4284a5b82b3b4af67483feb4580acfb8f023a20f1de9fd6" target="jre/lib/libawt_headless.so"/>
+        <entry executable="false" sha256="53ef7caa702eec1264e5f3566caa353d56e4bdb140b2f77a9cd5c1aaa633be86" target="jre/lib/libprefs.so"/>
+        <entry executable="false" sha256="aa9efb969444c1484e29adecab55a122458090616e766b2f1230ef05bc3867e0" target="jre/lib/jvm.cfg"/>
+        <entry executable="false" sha256="9ef542a6acec2f9452f0ad613c08c3eb572ab448be6dab8a04736f3d53bac877" target="jre/lib/libnio.so"/>
+        <entry executable="false" sha256="cc5d07ee37c689ed94f29a6ef21bcd6710b19c910d143bfef91a7bf72cdb6eed" target="jre/lib/libjsound.so"/>
+        <entry executable="false" sha256="8cda56d47c9f8020a7d4746d4258478f600c13052fa37d926218198537bae731" target="jre/lib/liblcms.so"/>
+        <entry executable="false" sha256="c29c3d4cfa3f138679eed631e4d292e1cd78f08efef928348e935dd463f20052" target="jre/lib/libawt_xawt.so"/>
+        <entry executable="false" sha256="bc390d255c18f9117907de666c208fe6de0c8fc6b6db90eb6d8a3074e1f7685a" target="jre/man/man1/java.1"/>
+        <entry executable="false" sha256="50f936074ff91f69501480530d1c3349827d91f938ea93a839e350ddbf0fce80" target="jre/man/man1/jfr.1"/>
+        <entry executable="false" sha256="473ac4a60623c45e5a48fbb2bcf7075b5813b686f859e1ab9034d75fad21737a" target="jre/man/man1/keytool.1"/>
+        <entry executable="true" sha256="98461bee87cc3b02abc845bf877ac3a95eee3903810755f4492a7e338040b3fb" target="jre/bin/keytool"/>
+        <entry executable="true" sha256="6353e88336a6409f589a387e44e2e1286bef6fb44a264e4d3418bf55749cc5fe" target="jre/bin/java"/>
+        <entry executable="true" sha256="f3603eb2786c9c03054ce307607bb11d591d9a8462bb34b322e0c8472b5fa7c4" target="jre/bin/jfr"/>
+        <entry executable="false" sha256="7ea36b40d59bb70214f26a85739ec5b4ebd7cd93edaf7446ec176c2909276422" target="jre/release"/>
+        <entry executable="false" sha256="a69bce275ba7a3570af6579cb0f55682cd75fedfcd49e0e8e9022270c447c916" target="jre/legal/jdk.jfr/ADDITIONAL_LICENSE_INFO"/>
+        <entry executable="false" sha256="a44eb7b5caf5534c6ef536b21edb40b4d6babf91bf97d9d45596868618b2c6fb" target="jre/legal/jdk.jfr/ASSEMBLY_EXCEPTION"/>
+        <entry executable="false" sha256="4b9abebc4338048a7c2dc184e9f800deb349366bdf28eb23c2677a77b4c87726" target="jre/legal/jdk.jfr/LICENSE"/>
+        <entry executable="false" sha256="a69bce275ba7a3570af6579cb0f55682cd75fedfcd49e0e8e9022270c447c916" target="jre/legal/java.datatransfer/ADDITIONAL_LICENSE_INFO"/>
+        <entry executable="false" sha256="a44eb7b5caf5534c6ef536b21edb40b4d6babf91bf97d9d45596868618b2c6fb" target="jre/legal/java.datatransfer/ASSEMBLY_EXCEPTION"/>
+        <entry executable="false" sha256="4b9abebc4338048a7c2dc184e9f800deb349366bdf28eb23c2677a77b4c87726" target="jre/legal/java.datatransfer/LICENSE"/>
+        <entry executable="false" sha256="a69bce275ba7a3570af6579cb0f55682cd75fedfcd49e0e8e9022270c447c916" target="jre/legal/java.desktop/ADDITIONAL_LICENSE_INFO"/>
+        <entry executable="false" sha256="41f4d63e670d75f5936a895aae919e226f5d50c54b5b09db3ba4d7052a2c1554" target="jre/legal/java.desktop/lcms.md"/>
+        <entry executable="false" sha256="c8b99f33890887d27ad56fba9edd8ebbc668cfe0689168505a95613d1d4b32f8" target="jre/legal/java.desktop/giflib.md"/>
+        <entry executable="false" sha256="580be596216ee11e2554b24ce944973acaede2ebf5ffba34a6bd8cc441c05043" target="jre/legal/java.desktop/jpeg.md"/>
+        <entry executable="false" sha256="04d61e3e8e71dd452ebe52008af5378d9f6640d14578aeb515dc5375973b0189" target="jre/legal/java.desktop/colorimaging.md"/>
+        <entry executable="false" sha256="a44eb7b5caf5534c6ef536b21edb40b4d6babf91bf97d9d45596868618b2c6fb" target="jre/legal/java.desktop/ASSEMBLY_EXCEPTION"/>
+        <entry executable="false" sha256="9a368ce6f9e123d397216174f39747e39bc3a8805bed6ab06d6f8ffaf9d391f4" target="jre/legal/java.desktop/harfbuzz.md"/>
+        <entry executable="false" sha256="4b9abebc4338048a7c2dc184e9f800deb349366bdf28eb23c2677a77b4c87726" target="jre/legal/java.desktop/LICENSE"/>
+        <entry executable="false" sha256="63f4e6f75caebbccb95d903fb43e46ac7111b3624d0a34f146b276d7d9e7b152" target="jre/legal/java.desktop/mesa3d.md"/>
+        <entry executable="false" sha256="1d4ffa93c87f35084b02a7aa90a21084b4019db4fe1003c2e5ce775b4a384f59" target="jre/legal/java.desktop/xwd.md"/>
+        <entry executable="false" sha256="f9e1a0e556f3309246d30c62ef159de7e21db39361176deda6fb57821c9872ec" target="jre/legal/java.desktop/libpng.md"/>
+        <entry executable="false" sha256="a69bce275ba7a3570af6579cb0f55682cd75fedfcd49e0e8e9022270c447c916" target="jre/legal/jdk.unsupported/ADDITIONAL_LICENSE_INFO"/>
+        <entry executable="false" sha256="a44eb7b5caf5534c6ef536b21edb40b4d6babf91bf97d9d45596868618b2c6fb" target="jre/legal/jdk.unsupported/ASSEMBLY_EXCEPTION"/>
+        <entry executable="false" sha256="4b9abebc4338048a7c2dc184e9f800deb349366bdf28eb23c2677a77b4c87726" target="jre/legal/jdk.unsupported/LICENSE"/>
+        <entry executable="false" sha256="5e4e6623a21a63f9bc16ea54af4133b8038e490c0d499a74676f9e5a61b9c5b2" target="jre/legal/java.base/unicode.md"/>
+        <entry executable="false" sha256="a69bce275ba7a3570af6579cb0f55682cd75fedfcd49e0e8e9022270c447c916" target="jre/legal/java.base/ADDITIONAL_LICENSE_INFO"/>
+        <entry executable="false" sha256="f2bd33ded550a05d59e8f659416ef382490504548d846e6388b1dffd273aa077" target="jre/legal/java.base/cldr.md"/>
+        <entry executable="false" sha256="1ff912740e84e024711def5fa482ffbb46eff64559760c467352dfa7c39a3307" target="jre/legal/java.base/asm.md"/>
+        <entry executable="false" sha256="a44eb7b5caf5534c6ef536b21edb40b4d6babf91bf97d9d45596868618b2c6fb" target="jre/legal/java.base/ASSEMBLY_EXCEPTION"/>
+        <entry executable="false" sha256="4b9abebc4338048a7c2dc184e9f800deb349366bdf28eb23c2677a77b4c87726" target="jre/legal/java.base/LICENSE"/>
+        <entry executable="false" sha256="45c6d4da48325edfbff3dcf71c704e504c057904435ed23c6d57046d551eb69d" target="jre/legal/java.base/aes.md"/>
+        <entry executable="false" sha256="d9ed58c3132c2c8e82b095eb4ce24cafd1f20531c16a7c9d01f2134843904db7" target="jre/legal/java.base/public_suffix.md"/>
+        <entry executable="false" sha256="af0057e8553906083f69c2fb9fe9ed4ae8bc2340a0b1e376a424702f00300b29" target="jre/legal/java.base/icu.md"/>
+        <entry executable="false" sha256="bef40679922d6fdfb7e4ddb223ad6722300f6054ba737bbf6188d60fcec517f9" target="jre/legal/java.base/c-libutl.md"/>
+        <entry executable="false" sha256="a69bce275ba7a3570af6579cb0f55682cd75fedfcd49e0e8e9022270c447c916" target="jre/legal/java.xml/ADDITIONAL_LICENSE_INFO"/>
+        <entry executable="false" sha256="8fd4c6732c5c1d63261dc2e87e052f7de7952cd265e387f8b6caf5ab3bf8c594" target="jre/legal/java.xml/jcup.md"/>
+        <entry executable="false" sha256="a44eb7b5caf5534c6ef536b21edb40b4d6babf91bf97d9d45596868618b2c6fb" target="jre/legal/java.xml/ASSEMBLY_EXCEPTION"/>
+        <entry executable="false" sha256="4b9abebc4338048a7c2dc184e9f800deb349366bdf28eb23c2677a77b4c87726" target="jre/legal/java.xml/LICENSE"/>
+        <entry executable="false" sha256="89c41f3ce50acb96280b73d7a9c1710e96dbf6fc97d43cab2b748de93f9fe442" target="jre/legal/java.xml/dom.md"/>
+        <entry executable="false" sha256="355bfdf9d7522374abca93b6797e2bb7cd52c7baa661b0d56c5124c2b9c957c3" target="jre/legal/java.xml/xerces.md"/>
+        <entry executable="false" sha256="066f44a28e921c049acaabc5f2b9c0a258ce6fe6bd59bd86ce378acc39c063c2" target="jre/legal/java.xml/bcel.md"/>
+        <entry executable="false" sha256="ea67226be5cfe19c7e79725c2c24a16676323264d69f9747c528de0b44541b03" target="jre/legal/java.xml/xalan.md"/>
+        <entry executable="false" sha256="a69bce275ba7a3570af6579cb0f55682cd75fedfcd49e0e8e9022270c447c916" target="jre/legal/java.prefs/ADDITIONAL_LICENSE_INFO"/>
+        <entry executable="false" sha256="a44eb7b5caf5534c6ef536b21edb40b4d6babf91bf97d9d45596868618b2c6fb" target="jre/legal/java.prefs/ASSEMBLY_EXCEPTION"/>
+        <entry executable="false" sha256="4b9abebc4338048a7c2dc184e9f800deb349366bdf28eb23c2677a77b4c87726" target="jre/legal/java.prefs/LICENSE"/>
+        <entry executable="false" sha256="299c2360b6155eb28990ec49cd21753f97e43442fe8fab03e04f3e213df43a66" target="jre/conf/sound.properties"/>
+        <entry executable="false" sha256="758b930a526fc670ab7537f8c26321527050a31f5f42149a2dda623c56a0a1a9" target="jre/conf/security/policy/unlimited/default_US_export.policy"/>
+        <entry executable="false" sha256="8d8a318e6d90dfd7e26612d2b6385aa704f686ca6134c551f8928418d92b851a" target="jre/conf/security/policy/unlimited/default_local.policy"/>
+        <entry executable="false" sha256="758b930a526fc670ab7537f8c26321527050a31f5f42149a2dda623c56a0a1a9" target="jre/conf/security/policy/limited/default_US_export.policy"/>
+        <entry executable="false" sha256="2b2627548e61316150d47ffc3e6cad465ca05b3cccd4785eb7d21aa7baa0f441" target="jre/conf/security/policy/limited/default_local.policy"/>
+        <entry executable="false" sha256="8c3d7648abcd95a272ce12db870082937f4d7f6878d730d83cb7fbb31eb8b2c9" target="jre/conf/security/policy/limited/exempt_local.policy"/>
+        <entry executable="false" sha256="6da0747334b0fea7592fd92614b2bbc8b126535e129b1fee483774d914e98eb5" target="jre/conf/security/policy/README.txt"/>
+        <entry executable="false" sha256="f2a00a1dec3b7a097f0815f338a84717ba1017d5d7aae96d842d2188d67c3250" target="jre/conf/security/java.policy"/>
+        <entry executable="false" sha256="76bb163d5cf0eeeacbefb40a24aab4e656665c8af4c5939b085bd950acf06226" target="jre/conf/security/java.security"/>
+        <entry executable="false" sha256="a88eeb56c61c0df79c8d000a43de10dba48c77130c8ada1af942c9a8ce29a787" target="jre/conf/net.properties"/>
+        <entry executable="false" sha256="e9441e51f0d29e25313d33a9005640f11ad93c27f01bc46a34bf02f2a98ffd6b" target="jre/conf/sdp/sdp.conf.template"/>
+    </entries>
+</release-info>

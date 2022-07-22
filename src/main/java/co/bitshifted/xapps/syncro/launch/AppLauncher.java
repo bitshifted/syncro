@@ -15,12 +15,12 @@ import java.nio.file.Path;
  */
 public class AppLauncher {
 
-	public Process launch(Path workDir) throws Exception {
-		var processor = new ConfigFileProcessor(workDir.resolve("application.xml"));
-		var command = processor.getLaunchCommand();
-
-		var procBuilder = new ProcessBuilder();
-		procBuilder.directory(workDir.toFile()).command(command);
-		return procBuilder.start();
-	}
+//	public Process launch(Path workDir) throws Exception {
+//		var processor = new ConfigFileProcessor(workDir.resolve("application.xml"));
+//		var command = processor.getLaunchCommand();
+//
+//		var procBuilder = new ProcessBuilder();
+//		procBuilder.directory(workDir.toFile()).command(command);
+//		return procBuilder.start();
+//	}
 }

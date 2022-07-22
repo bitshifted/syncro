@@ -8,56 +8,49 @@
 
 package co.bitshifted.xapps.syncro.http;
 
-import co.bitshifted.xapps.syncro.model.UpdateCheckStatus;
-import com.github.tomakehurst.wiremock.client.WireMock;
 import com.github.tomakehurst.wiremock.common.ConsoleNotifier;
-import com.github.tomakehurst.wiremock.core.WireMockConfiguration;
 import com.github.tomakehurst.wiremock.junit.WireMockRule;
-import org.junit.*;
 
-import static co.bitshifted.xapps.syncro.http.HttpConstants.*;
-import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.options;
-import static org.junit.Assert.*;
 
 /**
  * @author Vladimir Djurovic
  */
 public class SyncroHttpClientTest {
 
-	private SyncroHttpClient httpClient;
+//	private SyncroHttpClient httpClient;
+//
+//	@Rule
+//	public WireMockRule server = new WireMockRule(options()
+//			.port(9000)
+//			.notifier(new ConsoleNotifier(false)) // set to true for verbose logging
+//	);
+//
+//	@Before
+//	public void setup() {
+//		httpClient = new SyncroHttpClient("http://localhost:9000", "appId", "1234");
+//	}
 
-	@Rule
-	public WireMockRule server = new WireMockRule(options()
-			.port(9000)
-			.notifier(new ConsoleNotifier(false)) // set to true for verbose logging
-	);
+//	@Test
+//	public void testCheckForUpdateNoUpdate() {
+//		stubFor(get(urlPathMatching("\\/update\\/app\\/.+\\/release\\/.+"))
+//				.willReturn(aResponse()
+//						.withStatus(HTTP_STATUS_NOT_MODIFIED)));
+//		var status = httpClient.checkForUpdates();
+//
+//		assertEquals(UpdateCheckStatus.NO_UPDATE, status.getStatus());
+//	}
 
-	@Before
-	public void setup() {
-		httpClient = new SyncroHttpClient("http://localhost:9000", "appId", "1234");
-	}
-
-	@Test
-	public void testCheckForUpdateNoUpdate() {
-		stubFor(get(urlPathMatching("\\/update\\/app\\/.+\\/release\\/.+"))
-				.willReturn(aResponse()
-						.withStatus(HTTP_STATUS_NOT_MODIFIED)));
-		var status = httpClient.checkForUpdates();
-
-		assertEquals(UpdateCheckStatus.NO_UPDATE, status.getStatus());
-	}
-
-	@Test
-	@Ignore
-	public void testCheckForUpdateAvailable() {
-		String responseBody = "contents.zip -> http://server.com/path/to/file.zsync\n" +
-				"modules.zip-> http://server.net/another/path/file.zsync";
-		stubFor(get(urlPathMatching("\\/updates\\/app\\/.+\\/version\\/.+"))
-				.willReturn(aResponse()
-						.withBody(responseBody)
-						.withStatus(HTTP_STATUS_OK)));
-		var status = httpClient.checkForUpdates();
-		assertEquals(UpdateCheckStatus.UPDATE_AVAILABLE, status.getStatus());
-	}
+//	@Test
+//	@Ignore
+//	public void testCheckForUpdateAvailable() {
+//		String responseBody = "contents.zip -> http://server.com/path/to/file.zsync\n" +
+//				"modules.zip-> http://server.net/another/path/file.zsync";
+//		stubFor(get(urlPathMatching("\\/updates\\/app\\/.+\\/version\\/.+"))
+//				.willReturn(aResponse()
+//						.withBody(responseBody)
+//						.withStatus(HTTP_STATUS_OK)));
+//		var status = httpClient.checkForUpdates();
+//		assertEquals(UpdateCheckStatus.UPDATE_AVAILABLE, status.getStatus());
+//	}
 }
