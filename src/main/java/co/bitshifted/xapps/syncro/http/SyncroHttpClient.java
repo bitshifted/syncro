@@ -26,7 +26,6 @@ import static co.bitshifted.xapps.syncro.http.HttpConstants.*;
  */
 public class SyncroHttpClient {
 
-//	private final HttpClient httpClient;
 	private final String serverUrl;
 	private final String applicationId;
 	private final String releaseId;
@@ -38,9 +37,6 @@ public class SyncroHttpClient {
 	}
 
 	public UpdateInfo checkForUpdates(Path targetDir)  {
-//		var request = HttpRequest.newBuilder(
-//				URI.create(createUpdateCheckUrl(serverUrl, applicationId, releaseId)))
-//				.GET().build();
 		try {
 			HttpURLConnection conn = (HttpURLConnection) updateCheckUrl(serverUrl, applicationId, releaseId).openConnection();
 			conn.setInstanceFollowRedirects(true);
@@ -48,7 +44,6 @@ public class SyncroHttpClient {
 			conn.setReadTimeout(10000);
 			conn.setRequestMethod("GET");
 			int responseCode = conn.getResponseCode();
-//			var response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
 			if(responseCode == HTTP_STATUS_NOT_MODIFIED) {
 				return new UpdateInfo(UpdateCheckStatus.NO_UPDATE);
 			}

@@ -31,17 +31,11 @@ public final class HttpConstants {
 	}
 
 	public static URL updateCheckUrl(String serverUrl, String appId, String releaseId) throws MalformedURLException {
-//		StringBuilder sb = new StringBuilder(serverUrl);
-//		String deployUrl = String.format(UPDATE_CHECK_URL_TEMPLATE, appId, releaseId, getOsType());
-//		if(serverUrl.endsWith("/")) {
-//			sb.append(deployUrl.substring(1));
-//		}
-//		sb.append(deployUrl);
 		return new URL(urlFromTemplate(UPDATE_CHECK_URL_TEMPLATE, serverUrl, appId, releaseId, getOsType()));
 	}
 
 	public static URL getContentUrl(String serverUrl, String hash) throws MalformedURLException {
-		return new URL(urlFromTemplate(GET_CONTENT_URL_TEMPLATE, hash));
+		return new URL(urlFromTemplate(GET_CONTENT_URL_TEMPLATE, serverUrl, hash));
 	}
 
 	private static String urlFromTemplate(String template, String serverUrl, String... vars) {

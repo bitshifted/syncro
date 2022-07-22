@@ -1,6 +1,6 @@
 /*
  *
- *  * Copyright (c) 2022  Bitshift D.O.O (http://bitshifted.co)
+ *  * Copyright (c) 2022-2022  Bitshift D.O.O (http://bitshifted.co)
  *  *
  *  * This Source Code Form is subject to the terms of the Mozilla Public
  *  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -8,7 +8,7 @@
  *
  */
 
-package co.bitshifted.xapps.syncro.diff;
+package co.bitshifted.xapps.syncro.sync;
 
 import co.bitshifted.xapps.syncro.model.FileEntry;
 import co.bitshifted.xapps.syncro.model.ReleaseEntry;
@@ -28,6 +28,7 @@ public class FileDiffChecker {
     private final MessageDigest digest;
     private List<ReleaseEntry> updateList = new ArrayList<>();
     private List<FileEntry> deleteList = new ArrayList<>();
+    private List<ReleaseEntry> newEntries = new ArrayList<>();
 
     public FileDiffChecker(Path baseDir) throws NoSuchAlgorithmException {
         this.baseDir = baseDir;
@@ -36,16 +37,18 @@ public class FileDiffChecker {
 
 
     public  void process(List<ReleaseEntry> releaseEntries) throws IOException {
+        List<ReleaseEntry> copyList = new ArrayList<>(releaseEntries);
         Files.walk(baseDir).forEach(file -> {
             try {
                 if(Files.isRegularFile(file)) {
                     byte[] bytes = digest.digest(Files.readAllBytes(file));
                     String hash = bytesToHex(bytes);
-                    Optional<ReleaseEntry> entry = releaseEntries.stream().filter(e -> e.getTarget().toString().equals(file.toString())).findFirst();
+                    Optional<ReleaseEntry> entry = copyList.stream().filter(e -> e.getTarget().toString().equals(file.toString())).findFirst();
                     if(entry.isPresent()) {
                         if(!entry.get().getHash().equals(hash)) {
                             updateList.add(entry.get());
                         }
+                        copyList.remove(entry.get());
                     } else {
                         deleteList.add(new FileEntry(hash, file));
                     }
@@ -54,8 +57,8 @@ public class FileDiffChecker {
             } catch(IOException ex) {
                 throw new IllegalStateException(ex);
             }
-
         });
+        newEntries.addAll(copyList);
     }
 
     public List<ReleaseEntry> getUpdateList() {
@@ -64,6 +67,10 @@ public class FileDiffChecker {
 
     public List<FileEntry> getDeleteList() {
         return deleteList;
+    }
+
+    public List<ReleaseEntry> getNewEntries() {
+        return newEntries;
     }
 
     private static String bytesToHex(byte[] hash) {

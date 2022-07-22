@@ -11,6 +11,7 @@ package co.bitshifted.xapps.syncro;
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Arrays;
 import java.util.Locale;
 import java.util.Set;
 
@@ -19,17 +20,12 @@ import java.util.Set;
  */
 public final class SyncroUtils {
 
-	//private static final String XAPPS_BASE_DIR = ".xapps";
-	//private static final Set<String> X64_ARCH_NAMES = Set.of("x86_64", "amd64");
+	private static final String[] X64_ARCH_NAMES = new String[]{"x86_64", "amd64"};
 
 	private SyncroUtils() {
 
 	}
 
-//	public static Path getAppCacheDir(String applicationId) {
-//		var userHomeDirPath = System.getProperty("user.home");
-//		return Path.of(userHomeDirPath, XAPPS_BASE_DIR, "cache", applicationId);
-//	}
 
 	public static String getOsType() {
 		String os = System.getProperty("os.name", "generic").toLowerCase(Locale.ENGLISH);
@@ -44,15 +40,14 @@ public final class SyncroUtils {
 		}
 	}
 
-//	public static String getCpuArch() {
-//		var arch = System.getProperty("os.arch");
-//		System.out.println("CPU arch: " + arch);
-//		if(X64_ARCH_NAMES.contains(arch)){
-//			return "x64";
-//		} else {
-//			return "x86";
-//		}
-//	}
+	public static String getCpuArch() {
+		String arch = System.getProperty("os.arch");
+		if(Arrays.asList(X64_ARCH_NAMES).contains(arch)){
+			return "x64";
+		} else {
+			return "x86";
+		}
+	}
 
 	public static boolean deleteDirectory(File directory) {
 		File[] allContents = directory.listFiles();
