@@ -8,6 +8,7 @@
 
 package co.bitshifted.xapps.syncro;
 
+import co.bitshifted.xapps.syncro.launch.LaunchArgs;
 import co.bitshifted.xapps.syncro.sync.FileDiffChecker;
 import co.bitshifted.xapps.syncro.http.SyncroHttpClient;
 import co.bitshifted.xapps.syncro.launch.ReleaseProcessor;
@@ -30,16 +31,15 @@ import java.util.List;
 public class Syncro {
 
 	public static void main(String... args) throws Exception {
-		if(args.length != 3) {
-			throw new IllegalArgumentException("Required arguments: server URL, application ID, release ID");
-		}
+
+		LaunchArgs launchArgs = new LaunchArgs();
 
 		Path workDir = Paths.get(System.getProperty("user.dir"));
-		System.out.println("work directory: " + workDir.toString());
-		String appId = args[1];
+		System.out.println("work directory: " + workDir);
+		String appId = launchArgs.getApplicationId();
 		Path tempDir = Files.createTempDirectory("syncro-" + appId);
 		System.out.println("temp directory: " + tempDir.toFile().getAbsolutePath());
-		SyncroHttpClient httpClient = new SyncroHttpClient(args[0], appId, args[2]);
+		SyncroHttpClient httpClient = new SyncroHttpClient(launchArgs.getServerUrl(), appId, launchArgs.getReleaseId());
 		UpdateInfo updateInfo = httpClient.checkForUpdates(tempDir);
 		if(updateInfo.getStatus() == UpdateCheckStatus.UPDATE_AVAILABLE) {
 			ReleaseProcessor processor = new ReleaseProcessor(updateInfo.getContent());
@@ -50,12 +50,21 @@ public class Syncro {
 			System.out.println("Update list: " + diffChecker.getUpdateList());
 			System.out.println("delete list: " + diffChecker.getDeleteList());
 			System.out.println("New entries: " + diffChecker.getNewEntries());
+			diffChecker.getDeleteList().forEach(item -> {
+				try {
+					Files.delete(item.getTarget());
+					System.out.println("Successfully deleted file " + item.getTarget().toAbsolutePath());
+				} catch (IOException ex) {
+					System.err.println("Failed to delete file: " + item.getTarget().toAbsolutePath());
+				}
+			});
 			List<ReleaseEntry> downloadList = new ArrayList<>(diffChecker.getUpdateList());
 			downloadList.addAll(diffChecker.getNewEntries());
 			downloadList.forEach(d -> {
 				try {
 					InputStream is = httpClient.getResource(d.getHash());
 					Files.copy(is, d.getTarget(), StandardCopyOption.REPLACE_EXISTING);
+					System.out.println("Successfully downloaded file " + d.getTarget().toAbsolutePath());
 				} catch(IOException ex) {
 					throw new IllegalStateException(ex);
 				}
