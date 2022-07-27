@@ -8,6 +8,7 @@
 
 package co.bitshifted.xapps.syncro;
 
+import co.bitshifted.xapps.syncro.http.DownloadHandler;
 import co.bitshifted.xapps.syncro.launch.LaunchArgs;
 import co.bitshifted.xapps.syncro.sync.FileDiffChecker;
 import co.bitshifted.xapps.syncro.http.SyncroHttpClient;
@@ -60,16 +61,8 @@ public class Syncro {
 			});
 			List<ReleaseEntry> downloadList = new ArrayList<>(diffChecker.getUpdateList());
 			downloadList.addAll(diffChecker.getNewEntries());
-			downloadList.forEach(d -> {
-				try {
-					InputStream is = httpClient.getResource(d.getHash());
-					Files.copy(is, d.getTarget(), StandardCopyOption.REPLACE_EXISTING);
-					System.out.println("Successfully downloaded file " + d.getTarget().toAbsolutePath());
-				} catch(IOException ex) {
-					throw new IllegalStateException(ex);
-				}
-
-			});
+			DownloadHandler handler = new DownloadHandler(workDir, tempDir, httpClient);
+			handler.handleDownload(downloadList);
 
 		}
 	}
