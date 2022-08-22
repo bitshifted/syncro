@@ -6,12 +6,12 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-package co.bitshifted.xapps.syncro.http;
+package co.bitshifted.appforge.syncro.http;
 
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import static co.bitshifted.xapps.syncro.SyncroUtils.*;
+import static co.bitshifted.appforge.syncro.SyncroUtils.*;
 
 /**
  * @author Vladimir Djurovic

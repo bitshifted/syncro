@@ -6,7 +6,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-package co.bitshifted.xapps.syncro.model;
+package co.bitshifted.appforge.syncro.model;
 
 import java.nio.file.Path;
 

@@ -8,7 +8,7 @@
  *
  */
 
-package co.bitshifted.xapps.syncro.launch;
+package co.bitshifted.appforge.syncro.launch;
 
 import java.io.IOException;
 import java.io.InputStream;

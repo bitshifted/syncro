@@ -6,10 +6,10 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-package co.bitshifted.xapps.syncro.http;
+package co.bitshifted.appforge.syncro.http;
 
-import co.bitshifted.xapps.syncro.model.UpdateCheckStatus;
-import co.bitshifted.xapps.syncro.model.UpdateInfo;
+import co.bitshifted.appforge.syncro.model.UpdateCheckStatus;
+import co.bitshifted.appforge.syncro.model.UpdateInfo;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -19,7 +19,7 @@ import java.net.HttpURLConnection;
 import java.nio.file.Path;
 import java.util.stream.Collectors;
 
-import static co.bitshifted.xapps.syncro.http.HttpConstants.*;
+import static co.bitshifted.appforge.syncro.http.HttpConstants.*;
 
 /**
  * @author Vladimir Djurovic

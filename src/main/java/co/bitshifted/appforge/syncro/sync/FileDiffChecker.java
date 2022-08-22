@@ -8,10 +8,10 @@
  *
  */
 
-package co.bitshifted.xapps.syncro.sync;
+package co.bitshifted.appforge.syncro.sync;
 
-import co.bitshifted.xapps.syncro.model.FileEntry;
-import co.bitshifted.xapps.syncro.model.ReleaseEntry;
+import co.bitshifted.appforge.syncro.model.FileEntry;
+import co.bitshifted.appforge.syncro.model.ReleaseEntry;
 
 import java.io.IOException;
 import java.nio.file.Files;
