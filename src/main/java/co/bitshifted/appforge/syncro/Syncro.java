@@ -16,6 +16,7 @@ import co.bitshifted.appforge.syncro.model.ReleaseEntry;
 import co.bitshifted.appforge.syncro.model.UpdateCheckStatus;
 import co.bitshifted.appforge.syncro.model.UpdateInfo;
 import co.bitshifted.appforge.syncro.sync.FileDiffChecker;
+import co.bitshifted.appforge.syncro.ui.UpdateWindow;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -30,6 +31,11 @@ import java.util.List;
 public class Syncro {
 
 	public static void main(String... args) throws Exception {
+
+		UpdateWindow window = new UpdateWindow();
+		window.init();
+		window.pack();
+		window.setVisible(true);
 
 		LaunchArgs launchArgs = new LaunchArgs();
 
