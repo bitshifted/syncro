@@ -9,7 +9,9 @@
 package co.bitshifted.appforge.syncro.http;
 
 import co.bitshifted.appforge.syncro.model.ReleaseEntry;
+import co.bitshifted.appforge.syncro.ui.UpdateWorker;
 
+import javax.swing.*;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -37,9 +39,11 @@ public class DownloadHandler {
 		this.httpClient = httpClient;
 	}
 
-	public void handleDownload(List<ReleaseEntry> entries) {
+	public void handleDownload(List<ReleaseEntry> entries, UpdateWorker worker) {
 		List<ReleaseEntry> retries = new ArrayList<>();
 		entries.stream().forEach(e -> {
+			worker.publish(workDir.relativize(e.getTarget()).toString());
+			worker.incrementCount();
 			byte[] fileData = null;
 			try {
 				fileData = downloadData(e.getHash());

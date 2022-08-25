@@ -30,7 +30,6 @@ public class UpdateWindow extends JFrame {
         progressBar.setStringPainted(true);
         progressBar.setMinimum(0);
         progressBar.setMaximum(100);
-        setLocationRelativeTo(null);
 
         addWindowListener(new UpdateWindowListener(progressBar));
     }
@@ -44,8 +43,16 @@ public class UpdateWindow extends JFrame {
             content.add(progressBar, BorderLayout.SOUTH);
             setBounds(splashScreen.getBounds());
         } else {
-            content.add(new JLabel("Updating..."), BorderLayout.CENTER);
+            BufferedImage img = ImageIO.read(getClass().getResourceAsStream("/default-splash.jpg"));
+            ImageIcon icon = new ImageIcon(img);
+            content.add(new JLabel(icon), BorderLayout.CENTER);
             content.add(progressBar, BorderLayout.SOUTH);
+            Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+            int height = screenSize.height;
+            int width = screenSize.width;
+            int x = width/2 - img.getWidth()/2;
+            int y = height/2 - img.getHeight()/2;
+            setBounds(new Rectangle(x,y,img.getWidth(), img.getHeight()));
         }
         add(content);
     }
