@@ -19,6 +19,7 @@ import co.bitshifted.appforge.syncro.model.UpdateInfo;
 import co.bitshifted.appforge.syncro.sync.FileDiffChecker;
 
 import javax.swing.*;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -40,7 +41,6 @@ public class UpdateWorker extends SwingWorker<Integer, String> {
 
     @Override
     protected Integer doInBackground() throws Exception {
-        System.out.println("Running in background");
         LaunchArgs launchArgs = new LaunchArgs();
 
         workDir = Paths.get(System.getProperty("user.dir"));
@@ -65,30 +65,7 @@ public class UpdateWorker extends SwingWorker<Integer, String> {
                 progressBar.setString("Update check failed");
                 break;
         }
-        return  result;
-//        if(updateInfo.getStatus() == UpdateCheckStatus.UPDATE_AVAILABLE) {
-//            ReleaseProcessor processor = new ReleaseProcessor(updateInfo.getContent());
-//            List<ReleaseEntry> releaseEntries = processor.getEntries(workDir);
-//            System.out.println("Release entries: " + releaseEntries);
-//            FileDiffChecker diffChecker = new FileDiffChecker(workDir);
-//            diffChecker.process(releaseEntries);
-//            System.out.println("Update list: " + diffChecker.getUpdateList());
-//            System.out.println("delete list: " + diffChecker.getDeleteList());
-//            System.out.println("New entries: " + diffChecker.getNewEntries());
-//            diffChecker.getDeleteList().forEach(item -> {
-//                try {
-//                    Files.delete(item.getTarget());
-//                    System.out.println("Successfully deleted file " + item.getTarget().toAbsolutePath());
-//                } catch (IOException ex) {
-//                    System.err.println("Failed to delete file: " + item.getTarget().toAbsolutePath());
-//                }
-//            });
-//            List<ReleaseEntry> downloadList = new ArrayList<>(diffChecker.getUpdateList());
-//            downloadList.addAll(diffChecker.getNewEntries());
-//            DownloadHandler handler = new DownloadHandler(workDir, tempDir, httpClient);
-//            handler.handleDownload(downloadList);
-//
-//        }
+        return result;
     }
 
     private void processUpdate(UpdateInfo updateInfo) throws Exception {
@@ -98,7 +75,17 @@ public class UpdateWorker extends SwingWorker<Integer, String> {
         System.out.println("Release entries: " + releaseEntries);
         FileDiffChecker diffChecker = new FileDiffChecker(workDir);
         diffChecker.process(releaseEntries);
+        System.out.println("Update list: " + diffChecker.getUpdateList());
+        System.out.println("delete list: " + diffChecker.getDeleteList());
+        System.out.println("New entries: " + diffChecker.getNewEntries());
         progressBar.setValue(10);
+        diffChecker.getDeleteList().forEach(item -> {
+                try {
+                    Files.delete(item.getTarget());
+                } catch (IOException ex) {
+                    System.err.println("Failed to delete file: " + item.getTarget().toAbsolutePath());
+                }
+            });
         downloadTotal = diffChecker.getUpdateList().size() + diffChecker.getNewEntries().size();
         List<ReleaseEntry> downloadList = new ArrayList<>(diffChecker.getUpdateList());
         downloadList.addAll(diffChecker.getNewEntries());
@@ -112,7 +99,7 @@ public class UpdateWorker extends SwingWorker<Integer, String> {
         try {
             Integer result = get();
             System.exit(result);
-        } catch(Exception ex) {
+        } catch (Exception ex) {
             progressBar.setString("Update failed: " + ex.getMessage());
         }
     }
@@ -131,7 +118,7 @@ public class UpdateWorker extends SwingWorker<Integer, String> {
         System.out.println("Download total: " + downloadTotal);
         System.out.println("Download progress: " + downloadProgress);
         System.out.println("Current progress: " + currentProgress);
-        progressBar.setValue(10 + (int)currentProgress);
+        progressBar.setValue(10 + (int) currentProgress);
         progressBar.setString("Processing: " + chunks.get(0));
     }
 }
