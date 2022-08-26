@@ -6,18 +6,19 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-package co.bitshifted.xapps.syncro.http;
+package co.bitshifted.appforge.syncro.http;
 
-import co.bitshifted.xapps.syncro.SyncroUtils;
-import co.bitshifted.xapps.syncro.model.DownloadResult;
-import co.bitshifted.xapps.syncro.model.ReleaseEntry;
+import co.bitshifted.appforge.syncro.model.ReleaseEntry;
+import co.bitshifted.appforge.syncro.ui.UpdateWorker;
 
-import java.io.*;
-import java.nio.ByteBuffer;
-import java.nio.channels.Channels;
-import java.nio.channels.ReadableByteChannel;
-import java.nio.channels.WritableByteChannel;
-import java.nio.file.*;
+import javax.swing.*;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,9 +39,11 @@ public class DownloadHandler {
 		this.httpClient = httpClient;
 	}
 
-	public void handleDownload(List<ReleaseEntry> entries) {
+	public void handleDownload(List<ReleaseEntry> entries, UpdateWorker worker) {
 		List<ReleaseEntry> retries = new ArrayList<>();
 		entries.stream().forEach(e -> {
+			worker.publish(workDir.relativize(e.getTarget()).toString());
+			worker.incrementCount();
 			byte[] fileData = null;
 			try {
 				fileData = downloadData(e.getHash());

@@ -6,9 +6,9 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-package co.bitshifted.xapps.syncro.launch;
+package co.bitshifted.appforge.syncro.launch;
 
-import co.bitshifted.xapps.syncro.model.ReleaseEntry;
+import co.bitshifted.appforge.syncro.model.ReleaseEntry;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;

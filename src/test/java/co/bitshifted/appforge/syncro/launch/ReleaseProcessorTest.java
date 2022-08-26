@@ -8,9 +8,9 @@
  *
  */
 
-package co.bitshifted.xapps.syncro.launch;
+package co.bitshifted.appforge.syncro.launch;
 
-import co.bitshifted.xapps.syncro.model.ReleaseEntry;
+import co.bitshifted.appforge.syncro.model.ReleaseEntry;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

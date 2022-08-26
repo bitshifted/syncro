@@ -8,7 +8,7 @@
  *
  */
 
-package co.bitshifted.xapps.syncro.model;
+package co.bitshifted.appforge.syncro.model;
 
 import java.nio.file.Path;
 
