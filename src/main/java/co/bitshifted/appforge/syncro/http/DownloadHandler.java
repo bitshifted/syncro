@@ -47,10 +47,16 @@ public class DownloadHandler {
 			byte[] fileData = null;
 			try {
 				fileData = downloadData(e.getHash());
+				Files.createDirectories(e.getTarget().getParent());
 				Files.copy(new ByteArrayInputStream(fileData), e.getTarget(), StandardCopyOption.REPLACE_EXISTING);
 				System.out.println("Successfully downloaded file " + e.getTarget().toAbsolutePath());
+				if(e.isExecutable()) {
+					e.getTarget().toFile().setExecutable(true);
+					System.out.println("File " + e.getTarget().toString() + " marked as executable");
+				}
 			} catch(IOException ex) {
-				System.err.println("Failed to write file " + e.getTarget().toAbsolutePath().toString());
+				System.err.println("Failed to write file " + e.getTarget().toAbsolutePath() + ". Exception: " + ex.getClass().getName() +  ", message: " + ex.getMessage());
+				ex.printStackTrace();
 				if(fileData == null){
 					throw new IllegalStateException("Failed to get file data");
 				}
