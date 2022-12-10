@@ -18,7 +18,7 @@ import static co.bitshifted.appforge.syncro.SyncroUtils.*;
  */
 public final class HttpConstants {
 
-	public static final String UPDATE_CHECK_URL_TEMPLATE = "/v1/releases/app/%s/current/%s/os/%s";
+	public static final String UPDATE_CHECK_URL_TEMPLATE = "/v1/releases/app/%s/current/%s?os=%s&arch=%s";
 	public static final String GET_CONTENT_URL_TEMPLATE = "/v1/content/%s";
 	public static final int HTTP_STATUS_OK = 200;
 	public static final int HTTP_STATUS_NOT_MODIFIED = 304;
@@ -31,7 +31,7 @@ public final class HttpConstants {
 	}
 
 	public static URL updateCheckUrl(String serverUrl, String appId, String releaseId) throws MalformedURLException {
-		return new URL(urlFromTemplate(UPDATE_CHECK_URL_TEMPLATE, serverUrl, appId, releaseId, getOsType()));
+		return new URL(urlFromTemplate(UPDATE_CHECK_URL_TEMPLATE, serverUrl, appId, releaseId, getOsType(), getCpuArch()));
 	}
 
 	public static URL getContentUrl(String serverUrl, String hash) throws MalformedURLException {

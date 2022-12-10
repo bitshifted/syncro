@@ -18,6 +18,7 @@ import java.util.Locale;
 public final class SyncroUtils {
 
 	private static final String[] X64_ARCH_NAMES = new String[]{"x86_64", "amd64"};
+	private static final String[] AARCH64_ARCH_NAMES = new String[]{"aarch64", "arm64"};
 
 	private SyncroUtils() {
 
@@ -41,9 +42,11 @@ public final class SyncroUtils {
 		String arch = System.getProperty("os.arch");
 		if(Arrays.asList(X64_ARCH_NAMES).contains(arch)){
 			return "x64";
-		} else {
-			return "x86";
 		}
+		if(Arrays.asList(AARCH64_ARCH_NAMES).contains(arch)) {
+			return "aarch64";
+		}
+		return "unknown";
 	}
 
 	public static boolean deleteDirectory(File directory) {
