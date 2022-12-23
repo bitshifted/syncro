@@ -12,10 +12,7 @@ import co.bitshifted.appforge.syncro.model.ReleaseEntry;
 import co.bitshifted.appforge.syncro.ui.UpdateWorker;
 
 import javax.swing.*;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
@@ -32,15 +29,16 @@ public class DownloadHandler {
 	private final Path workDir;
 	private final Path tempDir;
 	private final SyncroHttpClient httpClient;
+	private final StringBuilder retriesBuilder;
 
 	public DownloadHandler(Path workDir, Path tempDir, SyncroHttpClient httpClient){
 		this.workDir = workDir;
 		this.tempDir = tempDir;
 		this.httpClient = httpClient;
+		this.retriesBuilder = new StringBuilder();
 	}
 
-	public void handleDownload(List<ReleaseEntry> entries, UpdateWorker worker) {
-		List<ReleaseEntry> retries = new ArrayList<>();
+	public int handleDownload(List<ReleaseEntry> entries, UpdateWorker worker) {
 		entries.stream().forEach(e -> {
 			worker.publish(workDir.relativize(e.getTarget()).toString());
 			worker.incrementCount();
@@ -60,12 +58,23 @@ public class DownloadHandler {
 				if(fileData == null){
 					throw new IllegalStateException("Failed to get file data");
 				}
-				saveRetry(e, fileData);
+				Path tmpFile = saveRetry(e, fileData);
+				addRetryEntry(tmpFile, e.getTarget());
 			}
 		});
+		if(retriesBuilder.length() > 0) {
+			System.out.println("Saving retries to file");
+			try (BufferedWriter bw = new BufferedWriter(new FileWriter(workDir.resolve(RETRY_FILE_LIST).toFile()))) {
+				bw.write(retriesBuilder.toString());
+			} catch (IOException ex) {
+				System.err.println("Failed to create retry file: " + ex.getMessage());
+			}
+			return UpdateWorker.UPDATE_RETRY_NEEDED;
+		}
+		return UpdateWorker.UPDATE_COMPLETE;
 	}
 
-	private void saveRetry(ReleaseEntry entry, byte[] data) {
+	private Path saveRetry(ReleaseEntry entry, byte[] data) {
 		Path tmpFile = tempDir.resolve(entry.getHash());
 		try(ByteArrayInputStream bin = new ByteArrayInputStream(data)) {
 			Files.copy(bin, tmpFile, StandardCopyOption.REPLACE_EXISTING);
@@ -73,8 +82,9 @@ public class DownloadHandler {
 				tmpFile.toFile().setExecutable(true);
 			}
 		} catch(IOException ex) {
-			System.err.println("Failed to copy file " + tmpFile.toAbsolutePath().toString());
+			System.err.println("Failed to copy file " + tmpFile.toAbsolutePath());
 		}
+		return tmpFile;
 	}
 
 	private byte[] downloadData(String hash) throws IOException {
@@ -87,5 +97,12 @@ public class DownloadHandler {
 			}
 			return bout.toByteArray();
 		}
+	}
+
+	private  void addRetryEntry(Path source, Path target) {
+		retriesBuilder.append(source.toFile().getAbsolutePath())
+			.append("->")
+			.append(target.toFile().getAbsolutePath())
+			.append("\n");
 	}
 }
