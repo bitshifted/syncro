@@ -38,13 +38,15 @@ public class UpdateWorker extends SwingWorker<Integer, String> {
     private final JProgressBar progressBar;
     private Path workDir;
     private Path tempDir;
+    private final Path launcherFilePath;
     private SyncroHttpClient httpClient;
     private int downloadTotal;
     private int downloadProgress = 0;
     private final StringBuilder deleteRetryBuilder;
     private boolean deleteRetryNeeded = false;
 
-    public UpdateWorker(JProgressBar progressBar) {
+    public UpdateWorker(JProgressBar progressBar, Path launcherFilePath) {
+        this.launcherFilePath = launcherFilePath;
         this.progressBar = progressBar;
         this.deleteRetryBuilder = new StringBuilder();
     }
@@ -117,7 +119,7 @@ public class UpdateWorker extends SwingWorker<Integer, String> {
         downloadTotal = diffChecker.getUpdateList().size() + diffChecker.getNewEntries().size();
         List<ReleaseEntry> downloadList = new ArrayList<>(diffChecker.getUpdateList());
         downloadList.addAll(diffChecker.getNewEntries());
-        DownloadHandler handler = new DownloadHandler(workDir, tempDir, httpClient);
+        DownloadHandler handler = new DownloadHandler(workDir, tempDir, httpClient, launcherFilePath);
         int status = handler.handleDownload(downloadList, this);
         if(deleteRetryNeeded || status ==  UPDATE_RETRY_NEEDED) {
             return UPDATE_RETRY_NEEDED;

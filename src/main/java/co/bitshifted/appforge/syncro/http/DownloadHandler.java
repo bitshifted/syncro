@@ -28,12 +28,14 @@ public class DownloadHandler {
 
 	private final Path workDir;
 	private final Path tempDir;
+	private final Path launcherFilePath;
 	private final SyncroHttpClient httpClient;
 	private final StringBuilder retriesBuilder;
 
-	public DownloadHandler(Path workDir, Path tempDir, SyncroHttpClient httpClient){
+	public DownloadHandler(Path workDir, Path tempDir, SyncroHttpClient httpClient, Path launcherFilePath){
 		this.workDir = workDir;
 		this.tempDir = tempDir;
+		this.launcherFilePath = launcherFilePath;
 		this.httpClient = httpClient;
 		this.retriesBuilder = new StringBuilder();
 	}
@@ -45,6 +47,12 @@ public class DownloadHandler {
 			byte[] fileData = null;
 			try {
 				fileData = downloadData(e.getHash());
+				if(e.getTarget().equals(launcherFilePath)) {
+					System.out.println("Launcher file update detected");
+					Path tmpFile = saveRetry(e, fileData);
+					addRetryEntry(tmpFile, e.getTarget());
+					return; // skip to next item
+				}
 				Files.createDirectories(e.getTarget().getParent());
 				Files.copy(new ByteArrayInputStream(fileData), e.getTarget(), StandardCopyOption.REPLACE_EXISTING);
 				System.out.println("Successfully downloaded file " + e.getTarget().toAbsolutePath());

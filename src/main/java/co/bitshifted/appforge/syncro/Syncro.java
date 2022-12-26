@@ -30,12 +30,24 @@ import java.util.List;
  */
 public class Syncro {
 
-	public static void main(String... args) throws Exception {
+	public static final String ARG_LAUNCHER="--launcher-file=";
 
-		UpdateWindow window = new UpdateWindow();
+	public static void main(String... args) throws Exception {
+		if(args.length != 1) {
+			throw new  IllegalArgumentException("Expected agument --launcher-file=<file-path>");
+		}
+		String launcherFilePath = extractLauncherFileName(args[0]);
+
+		UpdateWindow window = new UpdateWindow(launcherFilePath);
 		window.init();
 		window.pack();
 		window.setVisible(true);
+	}
 
+	private static String extractLauncherFileName(String input) {
+		if(!input.startsWith(ARG_LAUNCHER)) {
+			throw new IllegalArgumentException("Invalid argument " + input);
+		}
+		return input.replace(ARG_LAUNCHER, "");
 	}
 }
