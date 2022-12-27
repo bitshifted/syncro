@@ -15,14 +15,18 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class UpdateWindow extends JFrame {
 
     private final JPanel content;
     private final JProgressBar progressBar;
+    private final Path launcherFilePath;
 
-    public UpdateWindow() {
+    public UpdateWindow(String launcherFilePath) {
         super("UpdateWindow");
+        this.launcherFilePath = Paths.get(launcherFilePath);
         setUndecorated(true);
         this.content = new JPanel();
         content.setLayout(new BorderLayout());
@@ -31,7 +35,7 @@ public class UpdateWindow extends JFrame {
         progressBar.setMinimum(0);
         progressBar.setMaximum(100);
 
-        addWindowListener(new UpdateWindowListener(progressBar));
+        addWindowListener(new UpdateWindowListener(progressBar, this.launcherFilePath));
     }
 
     public void init() throws IOException {
