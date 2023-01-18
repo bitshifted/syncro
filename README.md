@@ -1,3 +1,5 @@
+[![Release new version to Maven Central](https://github.com/bitshifted/syncro/actions/workflows/mvn-central-release.yml/badge.svg)](https://github.com/bitshifted/syncro/actions/workflows/mvn-central-release.yml)
+
 # Syncro
 
 *Syncro is part of [AppForge](https://github.com/bitshifted/appforge) platform.*

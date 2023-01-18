@@ -5,14 +5,29 @@
   <parent>
     <groupId>co.bitshifted.appforge</groupId>
     <artifactId>appforge</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.1</version>
   </parent>
   <groupId>co.bitshifted.appforge</groupId>
   <artifactId>syncro</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
+  <version>${revision}</version>
   <packaging>jar</packaging>
-  <description>App synchronisation library</description>
 
+  <name>Syncro</name>
+  <description>App synchronisation library</description>
+  <url>https://github.com/bitshifted/syncro</url>
+
+  <scm>
+    <connection>scm:git:git@github.com:bitshifted/syncro.git</connection>
+    <developerConnection>scm:git:git@github.com:bitshifted/syncro.git</developerConnection>
+    <url>https://github.com/bitshifted/syncro</url>
+    <tag>v1.0.0</tag>
+  </scm>
+
+    <properties>
+      <revision>0.0.0-SNAPSHOT</revision>
+      <maven.compiler.source>1.8</maven.compiler.source>
+      <maven.compiler.target>1.8</maven.compiler.target>
+    </properties>
 
    <dependencies>
     <dependency>
