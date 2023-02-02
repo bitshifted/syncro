@@ -14,6 +14,6 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
           cache: 'maven'
-      - name: Build and install
+      - name: Build and test
         run: |
-          mvn -Dgpg.skip clean install
+          mvn -Dgpg.skip clean verify
