@@ -5,7 +5,7 @@
   <parent>
     <groupId>co.bitshifted.appforge</groupId>
     <artifactId>appforge</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.3</version>
   </parent>
   <groupId>co.bitshifted.appforge</groupId>
   <artifactId>syncro</artifactId>
@@ -20,7 +20,7 @@
     <connection>scm:git:git@github.com:bitshifted/syncro.git</connection>
     <developerConnection>scm:git:git@github.com:bitshifted/syncro.git</developerConnection>
     <url>https://github.com/bitshifted/syncro</url>
-    <tag>v1.0.0</tag>
+    <tag>HEAD</tag>
   </scm>
 
     <properties>
